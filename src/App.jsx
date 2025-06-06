@@ -30,7 +30,7 @@ const EAR_STYLES         = Array.from({ length: 2 }, (_, i) => `ear${i+1}`)
 const FACIAL_HAIR_STYLES = ['none','beard1','beard2','beard3','beard4']
 const TORSO_STYLES       = Array.from({ length: 18 }, (_, i) => `torso${i+1}`)
 const ARMS_STYLES        = Array.from({ length: 5 }, (_, i) => `arms${i+1}`)
-const BACKGROUNDS        = Array.from({ length: 5 }, (_, i) => `fondo${i+1}`) // Pon fondo1.png…fondo5.png en public/backgrounds/
+const BACKGROUNDS        = Array.from({ length: 4 }, (_, i) => `fondo${i+1}`) // Pon fondo1.png…fondo4.png en public/backgrounds/
 
 // Modelo base
 function PapercoolModel({ colors }) {
