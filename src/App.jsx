@@ -605,7 +605,7 @@ for (const layer of TEMPLATE_LAYOUT) {
                        step === 4 ? 'NARIZ' :
                        step === 5 ? 'CEJAS' :
                        step === 6 ? 'OREJAS' :
-                       step === 7 ? 'BELLO FACIAL' :
+                       step === 7 ? 'VELLO FACIAL' :
                        step === 8 ? 'TORSO' :
                        step === 9 ? 'BRAZOS' : ''}
                     </h1>
