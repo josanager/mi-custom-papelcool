@@ -23,7 +23,7 @@ import { useViewport } from './hooks/useViewport'
 
 // Opciones de cada parte
 const HAIR_VARIANTS      = Array.from({ length: 11 }, (_, i) => `hair${i+1}`)
-const EYE_STYLES         = { male: Array.from({ length: 11 }, (_, i) => `eye${i+1}`), female: Array.from({ length: 10 }, (_, i) => `eye${i+1}`) }
+const EYE_STYLES         = { male: Array.from({ length: 10 }, (_, i) => `eye${i+1}`), female: Array.from({ length: 10 }, (_, i) => `eye${i+1}`) }
 const NOSE_STYLES        = Array.from({ length: 6 }, (_, i) => `nose${i+1}`)
 const EYEBROW_STYLES     = Array.from({ length: 4 }, (_, i) => `eyebrow${i+1}`)
 const EAR_STYLES         = Array.from({ length: 2 }, (_, i) => `ear${i+1}`)
