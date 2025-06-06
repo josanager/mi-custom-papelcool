@@ -22,5 +22,5 @@ export function useViewport() {
   const isMobile = width <= 600;
   const isPortraitMobile = isPortrait && isMobile;
 
-  return { width, height, isPortrait, isMobile, isPortraitMobile };
-} 
+  return { width, height, isPortrait, isPortraitMobile };
+}
