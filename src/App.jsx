@@ -18,7 +18,6 @@ import FacialHair from './FacialHair'
 import Torso from './Torso'
 import Arms from './Arms'
 
-import './App.css'
 import { useViewport } from './hooks/useViewport'
 
 // Opciones de cada parte
