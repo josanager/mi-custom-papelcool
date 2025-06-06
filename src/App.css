@@ -1,0 +1,559 @@
+/* App.css */
+
+/* -------------- Variables globales -------------- */
+:root {
+  --wrapper-bg: linear-gradient(135deg, #00FF38, #00AA70);
+  --sidebar-bg: #5B2EFF;
+  --sidebar-width-desktop: 340px;
+  --canvas-height-mobile-portrait: 55vh;
+  --canvas-maxmobile-height: 340px;
+  --nav-button-bottom: 32px;
+  --color-morado: #5A10EB;
+  --color-negro-opaco: rgba(0, 0, 0, 0.2);
+  --color-blanco: #FFFFFF;
+  --color-azul-icono: #7FB3FF;
+  --color-circulo-blanco: #FFFFFF;
+}
+
+/* -------------- Estilos base (mobile-first) -------------- */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: var(--wrapper-bg);
+  transition: margin-left 0.3s;
+  overflow: hidden;
+}
+
+.sidebar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--canvas-maxmobile-height);
+  background: var(--sidebar-bg);
+  color: #fff;
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.canvas-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transition: height 0.3s ease, padding-top 0.3s ease;
+}
+
+.canvas-container.sidebar-open.step-1to9 {
+  justify-content: flex-start;
+  height: var(--canvas-height-mobile-portrait);
+  padding-top: 24px;
+}
+
+.toggle-sidebar-btn {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #222;
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 101;
+  transition: left 0.3s;
+}
+
+.nav-buttons {
+  position: absolute;
+  bottom: var(--nav-button-bottom);
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  pointer-events: none;
+}
+.nav-buttons > button {
+  pointer-events: auto;
+}
+
+@media (min-width: 601px) {
+  .wrapper {
+    flex-direction: row;
+  }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width-desktop);
+    height: 100vh;
+    border-radius: 0 32px 32px 0;
+    transform: translateX(-100%);
+    opacity: 0;
+    flex-direction: column;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  .canvas-container {
+    height: 100%;
+    padding-top: 0;
+  }
+  .wrapper.sidebar-open {
+    margin-left: var(--sidebar-width-desktop);
+  }
+  .toggle-sidebar-btn {
+    top: 18px;
+    left: var(--sidebar-width-desktop);
+  }
+  .nav-buttons {
+    left: 0;
+    width: calc(100vw - var(--sidebar-width-desktop));
+  }
+} 
+
+/* --------------------------------
+  3.2. ESTILOS PARA VISTA PORTRAIT (móvil vertical)
+---------------------------------- */
+
+.wrapper-portrait {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background: var(--wrapper-bg);
+  overflow: hidden;
+}
+
+.canvas-container-portrait {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  transition: transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.canvas-container-portrait.menu-open {
+  transform: translateY(-100px);
+}
+
+.toggle-menu-btn-portrait {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #222;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+}
+.toggle-menu-btn-portrait:hover {
+  background: #444;
+}
+
+.nav-buttons-portrait {
+  position: fixed;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 190;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 8px 16px;
+  border-radius: 24px;
+}
+.nav-buttons-portrait button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #fff;
+  color: #222;
+  font-weight: 700;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.nav-buttons-portrait button:hover {
+  background: #f0f0f0;
+  transform: scale(1.03);
+}
+
+.sidebar-portrait {
+  position: fixed;
+  bottom: -340px;
+  left: 0;
+  width: 100vw;
+  height: 340px;
+  background: var(--sidebar-bg);
+  color: #fff;
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  transition: bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 180;
+}
+.sidebar-portrait.open {
+  bottom: 0;
+}
+.sidebar-portrait h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+/* --------------------------------
+  4. ESTILOS PARA VISTA HORIZONTAL (desktop/landscape)
+---------------------------------- */
+
+.layout-horizontal {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: var(--wrapper-bg);
+}
+
+.sidebar-horizontal {
+  width: 340px;
+  background: var(--sidebar-bg);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  border-bottom-right-radius: 32px;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.08);
+  overflow-y: auto;
+}
+
+.sidebar-title {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  margin: 0 0 24px 0;
+}
+
+.list-parts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list-parts li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  padding: 8px;
+  border-radius: 12px;
+}
+.list-parts li:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.list-parts li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  padding: 8px;
+}
+
+.grid-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #999;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.thumb img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.thumb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+}
+.thumb.selected {
+  outline: 3px solid #fff;
+}
+
+.canvas-area {
+  flex: 1;
+  position: relative;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-buttons-horizontal {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 50;
+}
+.nav-buttons-horizontal button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background: #fff;
+  color: #222;
+  font-weight: 700;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.nav-buttons-horizontal button:hover {
+  background: #f0f0f0;
+  transform: scale(1.03);
+}
+
+.menu-color-movil {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 60vh;
+  min-height: 420px;
+  background: var(--color-morado);
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+  z-index: 100;
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.menu-color-movil.oculto {
+  transform: translateY(100%);
+}
+.menu-color-movil header {
+  padding: 16px 0 0 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-blanco);
+  letter-spacing: 1px;
+}
+.menu-color-movil .color-general {
+  display: flex;
+  align-items: center;
+  margin: 18px 16px 0 16px;
+}
+.menu-color-movil .icono-parte {
+  width: 32px;
+  height: 32px;
+  background: var(--color-azul-icono);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-color-movil .icono-parte svg {
+  width: 18px;
+  height: 18px;
+  color: #fff;
+}
+.menu-color-movil .etiqueta-general {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-blanco);
+  margin-left: 10px;
+  margin-right: 12px;
+}
+.menu-color-movil .selectores-generales {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.menu-color-movil .circulo-picker {
+  width: 36px;
+  height: 36px;
+  background: var(--color-circulo-blanco);
+  border: 2px solid transparent;
+  border-image: conic-gradient(red, orange, yellow, green, blue, purple, red) 1;
+  border-radius: 50%;
+  margin-right: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: outline 0.2s;
+}
+.menu-color-movil .circulo-picker.selected {
+  outline: 2px solid #fff;
+}
+.menu-color-movil .circulo-predeterminado {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-blanco);
+  border-radius: 50%;
+  margin-right: 8px;
+  display: inline-block;
+  cursor: pointer;
+  transition: outline 0.2s;
+}
+.menu-color-movil .circulo-predeterminado.selected {
+  outline: 2px solid #fff;
+}
+.menu-color-movil .color-verde { background: #00FF7F; }
+.menu-color-movil .color-rojo { background: #FF0000; }
+.menu-color-movil .color-fucsia { background: #FF00FF; }
+.menu-color-movil .divider {
+  border: none;
+  height: 2px;
+  background: var(--color-negro-opaco);
+  margin: 16px 16px;
+}
+.menu-color-movil .parte-cabeza-torso, .menu-color-movil .parte-extremidades {
+  margin-top: 8px;
+}
+.menu-color-movil .fila-parte {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  margin: 0 16px;
+}
+.menu-color-movil .fila-parte .texto-parte {
+  margin-left: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-blanco);
+}
+.menu-color-movil .fila-parte .circulo-picker {
+  margin-right: 0;
+}
+.menu-color-movil .fila-parte:not(:last-child) {
+  margin-bottom: 12px;
+}
+.menu-color-movil .parte-extremidades .fila-parte:not(:last-child) {
+  margin-bottom: 8px;
+}
+#btn-hide-menu {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  background: #000;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+.menu-color-movil .toast {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 16px;
+  font-size: 15px;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.menu-color-movil .toast.hide {
+  opacity: 0;
+}
+.navegacion-pasos {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 20;
+}
+#btn-anterior, #btn-siguiente {
+  width: 120px;
+  height: 40px;
+  background: #fff;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: opacity 0.2s;
+}
+#btn-anterior:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (max-width: 600px) {
+  .menu-color-movil {
+    min-height: 340px;
+    height: 60vh;
+    max-height: 480px;
+  }
+} 
