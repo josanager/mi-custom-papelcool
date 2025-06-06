@@ -107,7 +107,7 @@ export default function App() {
       : `url(/backgrounds/${bgStyle}.png) center center / cover no-repeat`
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const { isPortraitMobile, isMobile } = useViewport();
+  const { isPortraitMobile } = useViewport();
 
   // Clases dinámicas
   const wrapperClass = isPortraitMobile
