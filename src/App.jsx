@@ -685,7 +685,7 @@ for (const layer of TEMPLATE_LAYOUT) {
                 >
                   <ambientLight intensity={3.1} color={0xffffff} />
                   <directionalLight position={[5, 5, 5]} intensity={1.3} color={0xffffff} />
-                  <Suspense fallback={null}>
+                  <Suspense fallback={<div className="spinner" />}>
                     <PapercoolModel colors={colors} />
                     {step >= 2 && <Hair url={`/hair/${hairstyle}.png`} />}
                     {step >= 3 && <Eyes url={`/eyes/${eyeGender}/${eyeStyle}.png`} />}
@@ -729,7 +729,7 @@ for (const layer of TEMPLATE_LAYOUT) {
         >
           <ambientLight intensity={3.1} color={0xffffff} />
                     <directionalLight position={[5, 5, 5]} intensity={1.3} color={0xffffff} />
-          <Suspense fallback={null}>
+          <Suspense fallback={<div className="spinner" />}>
             <PapercoolModel colors={colors} />
             {step >= 2 && <Hair url={`/hair/${hairstyle}.png`} />}
             {step >= 3 && <Eyes url={`/eyes/${eyeGender}/${eyeStyle}.png`} />}
@@ -1083,7 +1083,3 @@ function HoverButton({ style, onClick, children }) {
   );
 }
 
-// Añade el CSS para el spinner
-<style>{`
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-`}</style>
