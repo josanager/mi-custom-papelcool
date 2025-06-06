@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
+import { pdfjs } from 'pdfjs-dist';
 import 'pdfjs-dist/web/pdf_viewer.css';
 
-// Configura el worker de PDF.js
-GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${require('pdfjs-dist/package.json').version}/pdf.worker.min.js`;
+// Configura el worker de PDF.js para Vite
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.js',
+  import.meta.url
+).toString();
 
 export default function PdfPreview({ pdfBlobUrl, width = 420, height = 260 }) {
   const canvasRef = useRef(null);
@@ -16,7 +19,7 @@ export default function PdfPreview({ pdfBlobUrl, width = 420, height = 260 }) {
     setLoading(true);
     let pdfDoc = null;
     let renderTask = null;
-    getDocument(pdfBlobUrl).promise
+    pdfjs.getDocument(pdfBlobUrl).promise
       .then(doc => {
         pdfDoc = doc;
         return doc.getPage(1);
